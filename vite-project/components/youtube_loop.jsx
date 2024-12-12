@@ -7,7 +7,7 @@ const YouTubeABLoop = () => {
   const [videoId, setVideoId] = useState("");
   const [videoMetadata, setVideoMetadata] = useState(null);
   const [startTime, setStartTime] = useState(0);
-  const [endTime, setEndTime] = useState(0);
+  const [endTime, setEndTime] = useState(100);
   const [currentTime, setCurrentTime] = useState(0);
   const [isLooping, setIsLooping] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -34,7 +34,14 @@ const YouTubeABLoop = () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
   }, [videoId]);
-
+  useEffect(() => {
+    if (playerRef.current) {
+      startTimeTracking();
+    }
+  }, [startTime, endTime, isLooping]);
+  useEffect(() => {
+    loadVideo();
+  }, [videoUrl]);
   const createPlayer = (id) => {
     if (playerRef.current) {
       playerRef.current.destroy();
@@ -77,19 +84,24 @@ const YouTubeABLoop = () => {
       case window.YT.PlayerState.ENDED:
         setIsPlaying(false);
         stopTimeTracking();
+        if (isLooping) {
+          playerRef.current.seekTo(startTime);
+          playerRef.current.playVideo();
+        }
         break;
     }
   };
-
-  const startTimeTracking = () => {
+  const startTimeTracking = (start, end) => {
     if (timerRef.current) clearInterval(timerRef.current);
 
     timerRef.current = setInterval(() => {
       const currentTime = playerRef.current.getCurrentTime();
       setCurrentTime(currentTime);
-
+      console.log(currentTime);
+      console.log(isLooping);
+      console.log(endTime);
       if (isLooping && currentTime >= endTime) {
-        playerRef.current.seekTo(startTime);
+        playerRef.current.seekTo(start);
       }
     }, 100);
   };
@@ -128,6 +140,9 @@ const YouTubeABLoop = () => {
 
   const toggleLooping = () => {
     setIsLooping(!isLooping);
+    if (playerRef.current) {
+      playerRef.current.seekTo(startTime);
+    }
   };
 
   const formatTime = (seconds) => {
@@ -170,6 +185,7 @@ const YouTubeABLoop = () => {
       newEndTime <= (videoMetadata?.duration || Infinity)
     ) {
       setEndTime(newEndTime);
+      console.log("endtime updated" + newEndTime);
     }
   };
 
@@ -191,7 +207,6 @@ const YouTubeABLoop = () => {
             value={videoUrl}
             onChange={(e) => setVideoUrl(e.target.value)}
           />
-          <button onClick={loadVideo}>読み込み</button>
         </div>
 
         <div className="player-container">
@@ -255,8 +270,8 @@ const YouTubeABLoop = () => {
             <label>開始点</label>
             <div className="loop-point-actions">
               <input
-                type="number"
-                value={startTime.toFixed(2)}
+                type="range"
+                value={startTime}
                 onChange={handleStartTimeChange}
                 step="0.1"
                 min="0"
@@ -270,8 +285,8 @@ const YouTubeABLoop = () => {
             <label>終了点</label>
             <div className="loop-point-actions">
               <input
-                type="number"
-                value={endTime.toFixed(2)}
+                type="range"
+                value={endTime}
                 onChange={handleEndTimeChange}
                 step="0.1"
                 min={startTime}
