@@ -1,0 +1,9 @@
+.footer-menu {
+  display: flex;
+  justify-content: center;
+  column-gap: 10px;
+}
+
+.copy-right {
+  text-align: center;
+}

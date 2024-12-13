@@ -1,0 +1,132 @@
+.url-input-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.url-input-container input {
+  flex-grow: 1;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  margin-right: 10px;
+}
+
+.url-input-container button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.youtube-player {
+  width: 100%;
+  aspect-ratio: 16/9;
+  background-color: black;
+}
+
+.video-info {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #666;
+}
+
+.loop-range {
+  position: absolute;
+  height: 100%;
+  background-color: rgba(0, 123, 255, 0.3);
+}
+
+.player-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.time-controls {
+  display: flex;
+  gap: 5px;
+  font-size: 14px;
+}
+
+.control-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.control-buttons button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.control-buttons button.active {
+  color: #007bff;
+}
+
+.ab-loop-controls {
+  display: flex;
+  flex-direction: column;
+}
+/* 色設定 */
+:root {
+  --bg: rgb(224, 224, 224);
+  --bar: rgb(0, 255, 0);
+}
+
+/* グリッド */
+.slidebar-multithumb {
+  display: grid;
+  padding: 1rem;
+}
+
+/* inputのスタイル */
+.slidebar-multithumb > input[type="range"],
+.slidebar-multithumb > div {
+  grid-column: 1;
+  grid-row: 3;
+  pointer-events: none;
+  -webkit-appearance: none;
+  background: none;
+  border: 1px solid;
+  overflow: hidden;
+}
+
+/* つまみ部分のスタイル */
+.slidebar-multithumb ::-webkit-slider-thumb {
+  pointer-events: auto;
+  -webkit-appearance: none;
+  width: 0.8rem;
+  height: 1.5rem;
+}
+
+/* それぞれのつまみのスタイル */
+.thumb-1 {
+  z-index: 2;
+}
+.thumb-2 {
+  z-index: 1;
+}
+.thumb-3 {
+  z-index: 3;
+  border-right: 5px solid black !important;
+}
+.thumb-1::-webkit-slider-runnable-track {
+  background: none;
+}
+
+.thumb-2::-webkit-slider-runnable-track {
+  background: var(--bg);
+}
+
+.thumb-1::-webkit-slider-thumb {
+  background: rgb(255, 139, 139);
+  box-shadow: -100vw 0 0 100vw var(--bg);
+}
+.thumb-2::-webkit-slider-thumb {
+  background: rgb(77, 169, 255);
+  box-shadow: -100vw 0 0 100vw var(--bar);
+}

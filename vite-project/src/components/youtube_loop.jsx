@@ -3,13 +3,15 @@ import { Play, Pause, Repeat, X } from "lucide-react";
 import "./youtube_loop.css";
 
 const YouTubeABLoop = () => {
-  const [videoUrl, setVideoUrl] = useState("");
+  const [videoUrl, setVideoUrl] = useState(
+    "https://www.youtube.com/watch?v=H7HmzwI67ec&ab_channel=OwlCityVEVO"
+  );
   const [videoId, setVideoId] = useState("");
   const [videoMetadata, setVideoMetadata] = useState(null);
   const [startTime, setStartTime] = useState(0);
   const [endTime, setEndTime] = useState(100);
   const [currentTime, setCurrentTime] = useState(0);
-  const [isLooping, setIsLooping] = useState(false);
+  const [isLooping, setIsLooping] = useState(true);
   const [isPlaying, setIsPlaying] = useState(false);
   const playerRef = useRef(null);
   const timerRef = useRef(null);
@@ -36,7 +38,7 @@ const YouTubeABLoop = () => {
   }, [videoId]);
   useEffect(() => {
     if (playerRef.current) {
-      startTimeTracking();
+      startTimeTracking(startTime, endTime);
     }
   }, [startTime, endTime, isLooping]);
   useEffect(() => {
@@ -97,11 +99,11 @@ const YouTubeABLoop = () => {
     timerRef.current = setInterval(() => {
       const currentTime = playerRef.current.getCurrentTime();
       setCurrentTime(currentTime);
-      console.log(currentTime);
+      console.log(end);
       console.log(isLooping);
-      console.log(endTime);
+      console.log(start);
       if (isLooping && currentTime >= endTime) {
-        playerRef.current.seekTo(start);
+        playerRef.current.seekTo(startTime);
       }
     }, 100);
   };
@@ -201,6 +203,7 @@ const YouTubeABLoop = () => {
     <div className="advanced-ab-loop-container">
       <div className="video-area">
         <div className="url-input-container">
+          <div>Please paste YouTube URL or Video ID</div>
           <input
             type="text"
             placeholder="YouTubeビデオURLを入力"
@@ -217,30 +220,6 @@ const YouTubeABLoop = () => {
               <span>{videoMetadata.title}</span>
             </div>
           )}
-
-          <div
-            className="progress-bar"
-            ref={progressRef}
-            onClick={handleProgressClick}
-          >
-            <div
-              className="progress"
-              style={{
-                width: `${
-                  (currentTime / (videoMetadata?.duration || 1)) * 100
-                }%`,
-              }}
-            ></div>
-            <div
-              className="loop-range"
-              style={{
-                left: `${(startTime / (videoMetadata?.duration || 1)) * 100}%`,
-                width: `${
-                  ((endTime - startTime) / (videoMetadata?.duration || 1)) * 100
-                }%`,
-              }}
-            ></div>
-          </div>
 
           <div className="player-controls">
             <div className="time-controls">
@@ -266,35 +245,38 @@ const YouTubeABLoop = () => {
         </div>
 
         <div className="ab-loop-controls">
-          <div className="loop-point">
-            <label>開始点</label>
-            <div className="loop-point-actions">
-              <input
-                type="range"
-                value={startTime}
-                onChange={handleStartTimeChange}
-                step="0.1"
-                min="0"
-                max={videoMetadata?.duration || 0}
-              />
-              <button onClick={setCurrentTimeAsStart}>現在の位置</button>
-            </div>
+          <div className="slidebar-multithumb">
+            <input
+              className="thumb-1"
+              type="range"
+              value={startTime}
+              onChange={handleStartTimeChange}
+              step="0.1"
+              min="0"
+              max={videoMetadata?.duration || 0}
+            />
+            <input
+              className="thumb-2"
+              type="range"
+              value={endTime}
+              onChange={handleEndTimeChange}
+              step="0.1"
+              min={startTime}
+              max={videoMetadata?.duration || 0}
+            />
+            <div
+              className="thumb-3"
+              style={{
+                width: `${
+                  (currentTime / (videoMetadata?.duration || 1)) * 100
+                }%`,
+              }}
+            ></div>
           </div>
-
-          <div className="loop-point">
-            <label>終了点</label>
-            <div className="loop-point-actions">
-              <input
-                type="range"
-                value={endTime}
-                onChange={handleEndTimeChange}
-                step="0.1"
-                min={startTime}
-                max={videoMetadata?.duration || 0}
-              />
-              <button onClick={setCurrentTimeAsEnd}>現在の位置</button>
-            </div>
-          </div>
+          <button onClick={setCurrentTimeAsStart}>
+            開始点を現在の位置に設定
+          </button>
+          <button onClick={setCurrentTimeAsEnd}>終了点を現在の位置</button>
         </div>
       </div>
     </div>

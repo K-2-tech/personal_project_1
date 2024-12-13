@@ -1,0 +1,40 @@
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  color: #333;
+}
+h1 {
+  color: #2c3e50;
+  border-bottom: 2px solid #ecf0f1;
+  padding-bottom: 10px;
+}
+h2 {
+  color: #34495e;
+  margin-top: 30px;
+}
+.effective-date {
+  font-style: italic;
+  color: #7f8c8d;
+}
+.section {
+  margin-bottom: 20px;
+}
+.contact-info {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-left: 4px solid #3498db;
+  margin-top: 30px;
+}
+a {
+  color: #3498db;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+ul {
+  padding-left: 30px;
+}
