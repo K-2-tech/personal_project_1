@@ -2,7 +2,13 @@ import "./header.css";
 const Header = () => {
   return (
     <>
-      <h1 className="title">YOUTUBE AB LOOPER</h1>
+      <div className="header-wrapper">
+        <img
+          src="../../public/y-ab-looper.svg"
+          alt="Youtube AB Looper's LOGO"
+        />
+        <h1 className="title">YOUTUBE AB LOOPER</h1>
+      </div>
     </>
   );
 };

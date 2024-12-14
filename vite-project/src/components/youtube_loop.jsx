@@ -4,7 +4,7 @@ import "./youtube_loop.css";
 
 const YouTubeABLoop = () => {
   const [videoUrl, setVideoUrl] = useState(
-    "https://www.youtube.com/watch?v=H7HmzwI67ec&ab_channel=OwlCityVEVO"
+    "https://www.youtube.com/watch?v=lN8xbrzvggA&ab_channel=JazzTutorial%7CwithJulianBradley"
   );
   const [videoId, setVideoId] = useState("");
   const [videoMetadata, setVideoMetadata] = useState(null);
@@ -15,7 +15,6 @@ const YouTubeABLoop = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const playerRef = useRef(null);
   const timerRef = useRef(null);
-  const progressRef = useRef(null);
 
   useEffect(() => {
     if (!window.YT) {
@@ -126,7 +125,7 @@ const YouTubeABLoop = () => {
     if (extractedId) {
       setVideoId(extractedId);
     } else {
-      alert("有効なYouTube動画URLを入力してください");
+      alert("Please enter a valid YouTube video URL");
     }
   };
 
@@ -151,18 +150,6 @@ const YouTubeABLoop = () => {
     const mins = Math.floor(seconds / 60);
     const secs = Math.floor(seconds % 60);
     return `${mins}:${secs.toString().padStart(2, "0")}`;
-  };
-
-  const handleProgressClick = (e) => {
-    if (!playerRef.current || !progressRef.current) return;
-
-    const progressBar = progressRef.current;
-    const clickPosition = e.nativeEvent.offsetX;
-    const percentage = clickPosition / progressBar.offsetWidth;
-    const newTime = percentage * videoMetadata.duration;
-
-    playerRef.current.seekTo(newTime);
-    setCurrentTime(newTime);
   };
 
   const handleStartTimeChange = (e) => {
@@ -200,13 +187,13 @@ const YouTubeABLoop = () => {
   };
 
   return (
-    <div className="advanced-ab-loop-container">
+    <div className="aab-loop-container">
       <div className="video-area">
         <div className="url-input-container">
           <div>Please paste YouTube URL or Video ID</div>
           <input
             type="text"
-            placeholder="YouTubeビデオURLを入力"
+            placeholder="Please paste YouTube URL or ID"
             value={videoUrl}
             onChange={(e) => setVideoUrl(e.target.value)}
           />
@@ -220,34 +207,13 @@ const YouTubeABLoop = () => {
               <span>{videoMetadata.title}</span>
             </div>
           )}
-
-          <div className="player-controls">
-            <div className="time-controls">
-              <span>{formatTime(currentTime)}</span>
-              <span>/</span>
-              <span>{formatTime(videoMetadata?.duration || 0)}</span>
-            </div>
-
-            <div className="control-buttons">
-              <button onClick={togglePlayPause} disabled={!videoId}>
-                {isPlaying ? <Pause /> : <Play />}
-              </button>
-
-              <button
-                onClick={toggleLooping}
-                className={isLooping ? "active" : ""}
-                disabled={!videoId}
-              >
-                <Repeat />
-              </button>
-            </div>
-          </div>
         </div>
 
         <div className="ab-loop-controls">
           <div className="slidebar-multithumb">
+            <p className="thumb-1-title">{formatTime(startTime)}</p>
             <input
-              className="thumb-1"
+              className="thumb-1-input"
               type="range"
               value={startTime}
               onChange={handleStartTimeChange}
@@ -255,8 +221,9 @@ const YouTubeABLoop = () => {
               min="0"
               max={videoMetadata?.duration || 0}
             />
+            <p className="thumb-2-title">{formatTime(endTime)}</p>
             <input
-              className="thumb-2"
+              className="thumb-2-input"
               type="range"
               value={endTime}
               onChange={handleEndTimeChange}
@@ -264,6 +231,7 @@ const YouTubeABLoop = () => {
               min={startTime}
               max={videoMetadata?.duration || 0}
             />
+
             <div
               className="thumb-3"
               style={{
@@ -273,10 +241,25 @@ const YouTubeABLoop = () => {
               }}
             ></div>
           </div>
+          <div className="control-buttons">
+            <button onClick={togglePlayPause} disabled={!videoId}>
+              {isPlaying ? <Pause /> : <Play />}
+            </button>
+
+            <button
+              onClick={toggleLooping}
+              className={isLooping ? "active" : ""}
+              disabled={!videoId}
+            >
+              <Repeat />
+            </button>
+          </div>
           <button onClick={setCurrentTimeAsStart}>
-            開始点を現在の位置に設定
+            Set the starting time to the current time.
           </button>
-          <button onClick={setCurrentTimeAsEnd}>終了点を現在の位置</button>
+          <button onClick={setCurrentTimeAsEnd}>
+            Set the ending time to the current time.
+          </button>
         </div>
       </div>
     </div>

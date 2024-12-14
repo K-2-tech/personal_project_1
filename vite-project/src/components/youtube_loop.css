@@ -47,12 +47,14 @@
 
 .time-controls {
   display: flex;
-  gap: 5px;
+  width: 100%;
+  justify-content: space-between;
   font-size: 14px;
 }
 
 .control-buttons {
   display: flex;
+  justify-content: center;
   gap: 10px;
 }
 
@@ -81,20 +83,31 @@
 .slidebar-multithumb {
   display: grid;
   padding: 1rem;
+  position: relative;
 }
 
 /* inputのスタイル */
-.slidebar-multithumb > input[type="range"],
-.slidebar-multithumb > div {
+.thumb-1-input,
+.thumb-2-input,
+.thumb-3 {
   grid-column: 1;
-  grid-row: 3;
+  grid-row: 1;
   pointer-events: none;
   -webkit-appearance: none;
   background: none;
   border: 1px solid;
   overflow: hidden;
 }
+.thumb-1-title,
+.thumb-2-title {
+  grid-row: 1;
+  grid-column: 1;
+  transform: translate(0, -20px);
+}
 
+.thumb-2-title {
+  text-align: right;
+}
 /* つまみ部分のスタイル */
 .slidebar-multithumb ::-webkit-slider-thumb {
   pointer-events: auto;
@@ -104,29 +117,22 @@
 }
 
 /* それぞれのつまみのスタイル */
-.thumb-1 {
+.thumb-1-input {
   z-index: 2;
 }
-.thumb-2 {
+.thumb-2-input {
   z-index: 1;
 }
 .thumb-3 {
   z-index: 3;
   border-right: 5px solid black !important;
 }
-.thumb-1::-webkit-slider-runnable-track {
-  background: none;
-}
 
-.thumb-2::-webkit-slider-runnable-track {
-  background: var(--bg);
-}
-
-.thumb-1::-webkit-slider-thumb {
+.thumb-1-input::-webkit-slider-thumb {
   background: rgb(255, 139, 139);
   box-shadow: -100vw 0 0 100vw var(--bg);
 }
-.thumb-2::-webkit-slider-thumb {
+.thumb-2-input::-webkit-slider-thumb {
   background: rgb(77, 169, 255);
   box-shadow: -100vw 0 0 100vw var(--bar);
 }

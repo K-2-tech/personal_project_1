@@ -164,14 +164,6 @@ const Terms = () => {
         </p>
       </div>
 
-      <div className="section">
-        <h2>Credit & Contact Information</h2>
-        <p>
-          This Terms and conditions page was created at
-          termsandconditionstemplate.com generator. If you have any queries
-          regarding any of our terms, please contact us.
-        </p>
-      </div>
       <Footer />
     </>
   );

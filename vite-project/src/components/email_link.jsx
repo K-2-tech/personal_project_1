@@ -11,9 +11,13 @@ const EmailLink = ({ email, subject = "", body = "" }) => {
   };
 
   return (
-    <a href={`mailto:${email}`} onClick={handleEmailClick}>
-      こちらからお問い合わせください
-    </a>
+    <div>
+      Please feel free to contact us through&nbsp;
+      <a href={`mailto:${email}`} onClick={handleEmailClick}>
+        this link
+      </a>
+      .
+    </div>
   );
 };
 

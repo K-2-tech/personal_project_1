@@ -9,7 +9,7 @@ const Contact = () => {
       <div>
         <Link to="/">Home</Link> &gt; <Link to="/contact">Contact</Link>
       </div>
-      <EmailLink email="example@example.com" subject="お問い合わせ" />
+      <EmailLink email="f4796150@gmail.com" subject="Inquiry" />
 
       <Footer />
     </>

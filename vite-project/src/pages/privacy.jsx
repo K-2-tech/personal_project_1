@@ -15,7 +15,7 @@ const Privacy = () => {
       <div class="section">
         <p>
           LoopTube ("us", "we", or "our") operates the{" "}
-          <a href="https://looptube.io">https://looptube.io</a> website
+          <a href="https://y-ab-looper.io">https://y-ab-looper.io</a> website
           (hereinafter referred to as the "Service").
         </p>
 
@@ -31,7 +31,7 @@ const Privacy = () => {
           accordance with this policy. Unless otherwise defined in this Privacy
           Policy, the terms used in this Privacy Policy have the same meanings
           as in our Terms and Conditions, accessible from{" "}
-          <a href="https://looptube.io">https://looptube.io</a>
+          <a href="https://y-ab-looper.io">https://y-ab-looper.io</a>
         </p>
       </div>
 
@@ -235,7 +235,7 @@ const Privacy = () => {
           by sending email to:
         </p>
         <p>
-          <a href="mailto:yuya.uzu@gmail.com">yuya.uzu@gmail.com</a>
+          <Link to="/contact">f4796150@gmail.com</Link>
         </p>
       </div>
       <Footer />
