@@ -52,7 +52,7 @@ const YouTubeABLoop = () => {
       videoId: id,
       playerVars: {
         autoplay: 0,
-        controls: 0,
+        controls: 1,
       },
       events: {
         onReady: onPlayerReady,
@@ -98,7 +98,9 @@ const YouTubeABLoop = () => {
     timerRef.current = setInterval(() => {
       const currentTime = playerRef.current.getCurrentTime();
       setCurrentTime(currentTime);
-
+      console.log(end);
+      console.log(isLooping);
+      console.log(start);
       if (isLooping && currentTime >= endTime) {
         playerRef.current.seekTo(startTime);
       }

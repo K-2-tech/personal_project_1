@@ -1,0 +1,39 @@
+.description-container {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.description-container > h1 {
+  color: #d32f2f;
+  text-align: center;
+  font-size: 2.5em;
+  margin-bottom: 20px;
+}
+
+.description-container > h2 {
+  color: #333;
+  font-size: 1.8em;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #d32f2f;
+  padding-bottom: 5px;
+}
+
+.description-container > p {
+  font-size: 1.2em;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.description-container > ul {
+  list-style-type: square;
+  padding-left: 20px;
+}
+
+.description-container > ul li {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
