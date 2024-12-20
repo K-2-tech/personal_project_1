@@ -15,7 +15,11 @@ const YouTubeABLoop = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const playerRef = useRef(null);
   const timerRef = useRef(null);
-
+  /*urlが変更されたらID抽出 */
+  useEffect(() => {
+    extractVideoId();
+  }, [videoUrl]);
+  /*IDが変更されたらプレイヤー作成 */
   useEffect(() => {
     if (!window.YT) {
       const tag = document.createElement("script");
@@ -35,14 +39,19 @@ const YouTubeABLoop = () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
   }, [videoId]);
+  /*startTime,endTimeが変更されたら*/
   useEffect(() => {
-    if (playerRef.current) {
-      startTimeTracking(startTime, endTime);
-    }
+    if (timerRef.current) clearInterval(timerRef.current);
+
+    timerRef.current = setInterval(() => {
+      const current = playerRef.current.getCurrentTime();
+      setCurrentTime(current);
+      if (isLooping && current >= endTime) {
+        playerRef.current.seekTo(startTime);
+      }
+    }, 100);
   }, [startTime, endTime, isLooping]);
-  useEffect(() => {
-    loadVideo();
-  }, [videoUrl]);
+  /*以下関数 */
   const createPlayer = (id) => {
     if (playerRef.current) {
       playerRef.current.destroy();
@@ -92,37 +101,15 @@ const YouTubeABLoop = () => {
         break;
     }
   };
-  const startTimeTracking = (start, end) => {
-    if (timerRef.current) clearInterval(timerRef.current);
 
-    timerRef.current = setInterval(() => {
-      const currentTime = playerRef.current.getCurrentTime();
-      setCurrentTime(currentTime);
-      console.log(end);
-      console.log(isLooping);
-      console.log(start);
-      if (isLooping && currentTime >= endTime) {
-        playerRef.current.seekTo(startTime);
-      }
-    }, 100);
-  };
-
-  const stopTimeTracking = () => {
-    if (timerRef.current) {
-      clearInterval(timerRef.current);
-    }
-  };
-
-  const extractVideoId = (url) => {
+  const extractVideoId = () => {
+    const url = videoUrl;
     const match = url.match(
       /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/
     );
-    return match ? match[1] : null;
-  };
 
-  const loadVideo = () => {
-    const extractedId = extractVideoId(videoUrl);
-    if (extractedId) {
+    if (match) {
+      const extractedId = match[1];
       setVideoId(extractedId);
     } else {
       alert("Please enter a valid YouTube video URL");
