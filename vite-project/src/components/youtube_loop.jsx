@@ -222,9 +222,9 @@ const YouTubeABLoop = () => {
             <div
               className="thumb-3"
               style={{
-                width: `${
-                  (currentTime / (videoMetadata?.duration || 1)) * 100
-                }%`,
+                transform: `translate(${
+                 currentTime / (videoMetadata?.duration) *(window.innerWidth-40)
+                  }px,0)`
               }}
             ></div>
           </div>

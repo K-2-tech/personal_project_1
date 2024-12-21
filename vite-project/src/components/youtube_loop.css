@@ -1,3 +1,4 @@
+body{box-sizing: border-box;}
 .url-input-container {
   display: flex;
   flex-direction: column;
@@ -10,14 +11,6 @@
   font-size: 16px;
   border: 1px solid #ddd;
   margin-right: 10px;
-}
-
-.url-input-container button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  cursor: pointer;
 }
 
 .youtube-player {
@@ -38,37 +31,6 @@
   background-color: rgba(0, 123, 255, 0.3);
 }
 
-.player-controls {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 10px;
-}
-
-.time-controls {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  font-size: 14px;
-}
-
-.control-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-}
-
-.control-buttons button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 5px;
-}
-
-.control-buttons button.active {
-  color: #007bff;
-}
-
 .ab-loop-controls {
   display: flex;
   flex-direction: column;
@@ -82,8 +44,11 @@
 /* グリッド */
 .slidebar-multithumb {
   display: grid;
-  padding: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
   position: relative;
+  width: 100%;
+  height: 20px;
 }
 
 /* inputのスタイル */
@@ -96,7 +61,10 @@
   -webkit-appearance: none;
   background: none;
   border: 1px solid;
+  height: 20px;
+  
   overflow: hidden;
+  
 }
 .thumb-1-title,
 .thumb-2-title {
@@ -112,8 +80,8 @@
 .slidebar-multithumb ::-webkit-slider-thumb {
   pointer-events: auto;
   -webkit-appearance: none;
-  width: 0.8rem;
-  height: 1.5rem;
+  width: 10px;
+  height: 20px;
 }
 
 /* それぞれのつまみのスタイル */
@@ -125,8 +93,8 @@
 }
 .thumb-3 {
   z-index: 3;
-  border-right: 5px solid black !important;
-}
+  width: 10px;
+background-color: black;}
 
 .thumb-1-input::-webkit-slider-thumb {
   background: rgb(255, 139, 139);
@@ -135,4 +103,16 @@
 .thumb-2-input::-webkit-slider-thumb {
   background: rgb(77, 169, 255);
   box-shadow: -100vw 0 0 100vw var(--bar);
+}
+.control-buttons{
+  display: flex;
+  justify-content: center;
+}
+.setStartTime-button{
+  display: inline;
+  color:rgb(255, 139, 139);
+}
+.setEndTime-button{
+  display: inline;
+  color:rgb(77, 169, 255);
 }
