@@ -108,6 +108,9 @@ background-color: black;}
   display: flex;
   justify-content: center;
 }
+.looping-active{
+  color:red;
+}
 .setStartTime-button{
   display: inline;
   color:rgb(255, 139, 139);

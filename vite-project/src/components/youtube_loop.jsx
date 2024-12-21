@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from "react";
-import { Play, Pause, Repeat, X } from "lucide-react";
+import React, { useState, useRef, useEffect, } from "react";
+import { Play, Pause, Repeat} from "lucide-react";
 import "./youtube_loop.css";
 
 const YouTubeABLoop = () => {
@@ -15,6 +15,8 @@ const YouTubeABLoop = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const playerRef = useRef(null);
   const timerRef = useRef(null);
+  const elementRef = useRef(null);
+  const [width, setWidth] = useState(0); 
   /*urlが変更されたらID抽出 */
   useEffect(() => {
     extractVideoId();
@@ -42,15 +44,17 @@ const YouTubeABLoop = () => {
   /*startTime,endTimeが変更されたら*/
   useEffect(() => {
     if (timerRef.current) clearInterval(timerRef.current);
-
     timerRef.current = setInterval(() => {
       const current = playerRef.current.getCurrentTime();
       setCurrentTime(current);
-      if (isLooping && current >= endTime) {
+      if (isLooping && currentTime >= endTime) {
         playerRef.current.seekTo(startTime);
       }
     }, 100);
-  }, [startTime, endTime, isLooping]);
+  }, [startTime, endTime, isLooping, currentTime]);
+  useEffect(() => { // DOMが完全にロードされた後に要素の幅を取得
+   if (elementRef.current) { setWidth(elementRef.current.offsetWidth); } }, []);
+    
   /*以下関数 */
   const createPlayer = (id) => {
     if (playerRef.current) {
@@ -85,15 +89,15 @@ const YouTubeABLoop = () => {
     switch (event.data) {
       case window.YT.PlayerState.PLAYING:
         setIsPlaying(true);
-        startTimeTracking();
+        
         break;
       case window.YT.PlayerState.PAUSED:
         setIsPlaying(false);
-        stopTimeTracking();
+        
         break;
       case window.YT.PlayerState.ENDED:
         setIsPlaying(false);
-        stopTimeTracking();
+      
         if (isLooping) {
           playerRef.current.seekTo(startTime);
           playerRef.current.playVideo();
@@ -156,6 +160,7 @@ const YouTubeABLoop = () => {
 
   const handleEndTimeChange = (e) => {
     const newEndTime = parseFloat(e.target.value);
+
     if (
       newEndTime > startTime &&
       newEndTime <= (videoMetadata?.duration || Infinity)
@@ -197,7 +202,7 @@ const YouTubeABLoop = () => {
         </div>
 
         <div className="ab-loop-controls">
-          <div className="slidebar-multithumb">
+          <div className="slidebar-multithumb" ref={elementRef}>
             <p className="thumb-1-title">{formatTime(startTime)}</p>
             <input
               className="thumb-1-input"
@@ -223,7 +228,7 @@ const YouTubeABLoop = () => {
               className="thumb-3"
               style={{
                 transform: `translate(${
-                 currentTime / (videoMetadata?.duration) *(window.innerWidth-40)
+                   width * currentTime / (videoMetadata?.duration || 0) 
                   }px,0)`
               }}
             ></div>
@@ -235,7 +240,7 @@ const YouTubeABLoop = () => {
 
             <button
               onClick={toggleLooping}
-              className={isLooping ? "active" : ""}
+              className={isLooping ? "looping-active" : ""}
               disabled={!videoId}
             >
               <Repeat />
