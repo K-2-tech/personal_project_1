@@ -10,10 +10,6 @@ createRoot(document.getElementById('root')).render(
     <HelmetProvider>
       <App >
         <Helmet>
-          
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3485571472560082"
-            crossorigin="anonymous"></script>
-          <meta name="google-adsense-account" content="ca-pub-3485571472560082"></meta>
         </Helmet>
       </App>
     </HelmetProvider>
