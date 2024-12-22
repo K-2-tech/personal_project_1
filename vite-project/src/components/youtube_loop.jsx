@@ -247,10 +247,11 @@ const YouTubeABLoop = () => {
             </button>
           </div>
           <button onClick={setCurrentTimeAsStart}>
-            Set the starting time to the current time.
+           
+            Set the <p className="setStartTime-button">starting time</p> to the current time.
           </button>
           <button onClick={setCurrentTimeAsEnd}>
-            Set the ending time to the current time.
+            Set the <p className="setEndTime-button">ending time</p> to the current time.
           </button>
         </div>
       </div>
