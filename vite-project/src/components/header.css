@@ -3,11 +3,22 @@
   height: 100px;
   justify-content: center;
   align-items: center;
+  
 }
 .title {
   color: red;
+  font-size:50px;
   text-align: center;
 }
 img {
-  height: 50%;
+  height: 75px;
+}
+@media screen and (max-width:499px) {
+  .header-wrapper {height: 75px;}
+  .title {
+    font-size:30px;
+  }
+  img {
+    height: 50px;
+  }
 }

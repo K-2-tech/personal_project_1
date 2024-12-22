@@ -9,8 +9,13 @@ body{box-sizing: border-box;}
   flex-grow: 1;
   padding: 10px;
   font-size: 16px;
-  border: 1px solid #ddd;
+  border: 1px solid #999;
+  background-color: #e0e0e0;
   margin-right: 10px;
+  
+  box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.2),
+  inset -2px -2px 5px rgba(255, 255, 255, 0.7);
+
 }
 
 .youtube-player {
@@ -35,6 +40,7 @@ body{box-sizing: border-box;}
   display: flex;
   flex-direction: column;
 }
+
 /* 色設定 */
 :root {
   --bg: rgb(224, 224, 224);
@@ -104,9 +110,25 @@ background-color: black;}
   background: rgb(77, 169, 255);
   box-shadow: -100vw 0 0 100vw var(--bar);
 }
-.control-buttons{
+.control-icons{
   display: flex;
+  gap: 30px ;
   justify-content: center;
+}
+
+div.control-buttons > button{
+  display: block;
+  margin: 0 auto;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin-top: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3), -2px -2px 5px rgba(255, 255, 255, 0.2);
+}
+div.control-buttons > button:hover{
+  border: 1px solid black;
+  background-color: black;
+  color:white;
+
 }
 .looping-active{
   color:red;

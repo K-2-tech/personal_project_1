@@ -182,7 +182,7 @@ const YouTubeABLoop = () => {
     <div className="aab-loop-container">
       <div className="video-area">
         <div className="url-input-container">
-          <div>Please paste YouTube URL or Video ID</div>
+          <div>Please paste YouTube URL or ID</div>
           <input
             type="text"
             placeholder="Please paste YouTube URL or ID"
@@ -220,7 +220,6 @@ const YouTubeABLoop = () => {
               value={endTime}
               onChange={handleEndTimeChange}
               step="0.1"
-              min={startTime}
               max={videoMetadata?.duration || 0}
             />
 
@@ -233,9 +232,9 @@ const YouTubeABLoop = () => {
               }}
             ></div>
           </div>
-          <div className="control-buttons">
+          <div className="control-icons">
             <button onClick={togglePlayPause} disabled={!videoId}>
-              {isPlaying ? <Pause /> : <Play />}
+              {isPlaying ? <Pause color="red"/> : <Play />}
             </button>
 
             <button
@@ -246,13 +245,14 @@ const YouTubeABLoop = () => {
               <Repeat />
             </button>
           </div>
-          <button onClick={setCurrentTimeAsStart}>
+          <div className="control-buttons"><button onClick={setCurrentTimeAsStart}>
            
-            Set the <p className="setStartTime-button">starting time</p> to the current time.
-          </button>
-          <button onClick={setCurrentTimeAsEnd}>
-            Set the <p className="setEndTime-button">ending time</p> to the current time.
-          </button>
+            Set the <p className="setStartTime-button">starting time</p> to the current time.</button>
+            <button onClick={setCurrentTimeAsEnd}>
+              Set the <p className="setEndTime-button">ending time</p> to the current time.</button>
+          </div>
+            
+
         </div>
       </div>
     </div>
