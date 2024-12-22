@@ -7,8 +7,6 @@ const Header = () => {
         <img src={image} alt="YAB Looper's LOGO" />
         <h1 className="title">YAB LOOPER</h1>
       </div>
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3485571472560082"
-    crossorigin="anonymous"></script>
     </>
   );
 };
