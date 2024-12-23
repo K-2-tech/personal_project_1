@@ -1,6 +1,6 @@
 .header-wrapper {
   display: flex;
-  height: 100px;
+  height: 70px;
   justify-content: center;
   align-items: center;
   
@@ -11,10 +11,10 @@
   text-align: center;
 }
 img {
-  height: 75px;
+  height: 60px;
 }
 @media screen and (max-width:499px) {
-  .header-wrapper {height: 75px;}
+  .header-wrapper {height: 55px;}
   .title {
     font-size:30px;
   }
