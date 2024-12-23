@@ -187,6 +187,7 @@ const YouTubeABLoop = () => {
             type="text"
             placeholder="Please paste YouTube URL or ID"
             value={videoUrl}
+            autocomplete="videoUrl"
             onChange={(e) => setVideoUrl(e.target.value)}
           />
         </div>
