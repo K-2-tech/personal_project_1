@@ -45,7 +45,8 @@ body{box-sizing: border-box;}
 .slidebar-multithumb {
   display: grid;
   padding-top: 0;
-  padding-bottom: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 2px 2px 5px #0000004d, -2px -2px 5px #fff3;
   position: relative;
   width: 100%;
   height: 25px;
