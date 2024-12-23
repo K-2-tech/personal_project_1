@@ -41,20 +41,14 @@ body{box-sizing: border-box;}
   flex-direction: column;
 }
 
-/* 色設定 */
-:root {
-  --bg: rgb(224, 224, 224);
-  --bar: rgb(0, 255, 0);
-}
-
 /* グリッド */
 .slidebar-multithumb {
   display: grid;
-  padding-top: 1rem;
+  padding-top: 0;
   padding-bottom: 2rem;
   position: relative;
   width: 100%;
-  height: 20px;
+  height: 25px;
 }
 
 /* inputのスタイル */
@@ -67,8 +61,7 @@ body{box-sizing: border-box;}
   -webkit-appearance: none;
   background: none;
   border: 1px solid;
-  height: 20px;
-  
+  height: 25px;
   overflow: hidden;
   
 }
@@ -76,7 +69,7 @@ body{box-sizing: border-box;}
 .thumb-2-title {
   grid-row: 1;
   grid-column: 1;
-  transform: translate(0, -20px);
+  transform: translate(0, 25px);
 }
 
 .thumb-2-title {
@@ -86,8 +79,8 @@ body{box-sizing: border-box;}
 .slidebar-multithumb ::-webkit-slider-thumb {
   pointer-events: auto;
   -webkit-appearance: none;
-  width: 10px;
-  height: 20px;
+  width: 15px;
+  height: 25px;
 }
 
 /* それぞれのつまみのスタイル */
@@ -103,19 +96,31 @@ body{box-sizing: border-box;}
 background-color: black;}
 
 .thumb-1-input::-webkit-slider-thumb {
-  background: rgb(255, 139, 139);
-  box-shadow: -100vw 0 0 100vw var(--bg);
+  background:red;
+  box-shadow: -100vw 0 0 100vw white;
 }
 .thumb-2-input::-webkit-slider-thumb {
-  background: rgb(77, 169, 255);
-  box-shadow: -100vw 0 0 100vw var(--bar);
+  background: blue;
+  box-shadow: -100vw 0 0 100vw greenyellow;
 }
 .control-icons{
   display: flex;
   gap: 30px ;
   justify-content: center;
+  height: 50px;
+  margin-bottom: 10px;
 }
-
+div.control-icons >button{
+  height: 60px;
+  width: 60px;
+  border-radius: 30px;  
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3), -2px -2px 5px rgba(255, 255, 255, 0.2);
+}
+div.control-icons >button > *{
+  height: 60px;
+  width: 60px;
+  padding: 10px;
+}
 div.control-buttons > button{
   display: block;
   margin: 0 auto;
@@ -135,9 +140,9 @@ div.control-buttons > button:hover{
 }
 .setStartTime-button{
   display: inline;
-  color:rgb(255, 139, 139);
+  color:red;
 }
 .setEndTime-button{
   display: inline;
-  color:rgb(77, 169, 255);
+  color:blue;
 }

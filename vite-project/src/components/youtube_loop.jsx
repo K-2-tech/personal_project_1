@@ -233,7 +233,7 @@ const YouTubeABLoop = () => {
             ></div>
           </div>
           <div className="control-icons">
-            <button onClick={togglePlayPause} disabled={!videoId}>
+            <button onClick={togglePlayPause} disabled={!videoId} aria-label="play or pause">
               {isPlaying ? <Pause color="red"/> : <Play />}
             </button>
 
@@ -241,6 +241,7 @@ const YouTubeABLoop = () => {
               onClick={toggleLooping}
               className={isLooping ? "looping-active" : ""}
               disabled={!videoId}
+              aria-label="loop or not"
             >
               <Repeat />
             </button>
