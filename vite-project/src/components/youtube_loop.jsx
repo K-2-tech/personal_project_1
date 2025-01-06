@@ -188,14 +188,15 @@ const YouTubeABLoop = () => {
         <div className="url-input-container">
           <div>Please paste YouTube URL or ID</div>
           <p className="error-message">{errorMessage}</p>
-          <input
+          <div className="url-input-box"><input
             type="text"
             placeholder="Please paste YouTube URL or ID"
             value={videoUrl}
             autocomplete="videoUrl"
             onChange={(e) => setVideoUrl(e.target.value)}
           />
-          <button onClick={clearURL} >Clear</button>
+          <button onClick={clearURL} >Clear</button></div>
+          
         </div>
 
         <div className="player-container">

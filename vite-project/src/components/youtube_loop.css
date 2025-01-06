@@ -4,29 +4,29 @@ body{box-sizing: border-box;}
   flex-direction: column;
   margin-bottom: 20px;
 }
-
-.url-input-container input {
+.url-input-box{
+  display: flex;
+}
+.url-input-box>input {
   flex-grow: 1;
   padding: 10px;
   font-size: 16px;
   border: 1px solid #999;
   background-color: #e0e0e0;
   margin-right: 10px;
-  
   box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.2),
   inset -2px -2px 5px rgba(255, 255, 255, 0.7);
 
 }
-.url-input-container button{
+.url-input-box button{
   display: block;
   margin: 3px auto;
   border: 1px solid black;
   border-radius: 10px;
   margin-top: 5px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3), -2px -2px 5px rgba(255, 255, 255, 0.2);
-  transform: translate(40vw,-40px);
 }
-.url-input-container button:hover{
+.url-input-box button:hover{
   background-color: black;
   color:white;
 }
