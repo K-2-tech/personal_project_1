@@ -2,13 +2,12 @@
   max-width: 800px;
   margin: 50px auto;
   padding: 20px;
-  background-color: #fff;
   border-radius: 8px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3), -2px -2px 5px rgba(255, 255, 255, 0.2);
 }
 
 div.description-container > h1 {
-  color: #d32f2f;
+  
   text-align: center;
   font-size: 2.5em;
   margin-bottom: 20px;
@@ -18,7 +17,7 @@ div.description-container > h2 {
   color: #333;
   font-size: 1.8em;
   margin-bottom: 15px;
-  border-bottom: 2px solid #d32f2f;
+  border-bottom: 2px solid black;
   padding-bottom: 5px;
 }
 
@@ -40,8 +39,7 @@ div.description-container > div {
 @media screen and (max-width:499px) {
   .description-container {
     margin: 30px auto;
-    padding: 1p5x;
-    background-color: #fff;
+    padding: 15px;
     border-radius: 6px;
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
   }

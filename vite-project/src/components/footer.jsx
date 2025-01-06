@@ -12,7 +12,7 @@ const Footer = () => {
         <a href="https://x.com/K2nyanko" target="_blank"><RiTwitterXFill /></a>
       </div>
       
-      <p className="copy-right">Copyright©K-2-tech</p>
+      <p className="copy-right">Copyright©K2nyanko</p>
     </>
   );
 };

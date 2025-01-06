@@ -1,12 +1,11 @@
 .header-wrapper {
   display: flex;
   height: 70px;
+
   justify-content: center;
   align-items: center;
-  
 }
 .title {
-  color: red;
   font-size:50px;
   text-align: center;
 }

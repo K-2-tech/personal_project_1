@@ -17,6 +17,21 @@ body{box-sizing: border-box;}
   inset -2px -2px 5px rgba(255, 255, 255, 0.7);
 
 }
+.url-input-container button{
+  display: block;
+  margin: 3px auto;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin-top: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3), -2px -2px 5px rgba(255, 255, 255, 0.2);
+  transform: translate(40vw,-40px);
+}
+.url-input-container button:hover{
+  background-color: black;
+  color:white;
+}
+
+
 
 .youtube-player {
   width: 100%;
@@ -97,12 +112,18 @@ body{box-sizing: border-box;}
 background-color: black;}
 
 .thumb-1-input::-webkit-slider-thumb {
-  background:red;
+  background:#FC9D9D;
   box-shadow: -100vw 0 0 100vw white;
 }
+.thumb-1-input::-webkit-slider-thumb:hover{
+  background-color: #ff7272;
+}
 .thumb-2-input::-webkit-slider-thumb {
-  background: blue;
-  box-shadow: -100vw 0 0 100vw greenyellow;
+  background: #AAD6EC;
+  box-shadow: -100vw 0 0 100vw #EEF9FF;
+}
+.thumb-2-input::-webkit-slider-thumb:hover{
+  background-color: #59b8e8;
 }
 .control-icons{
   display: flex;
@@ -111,6 +132,9 @@ background-color: black;}
   height: 50px;
   margin-bottom: 10px;
 }
+.control-icons > *:hover{background-color: black;color:white;}
+
+
 div.control-icons >button{
   height: 60px;
   width: 60px;
@@ -137,13 +161,13 @@ div.control-buttons > button:hover{
 
 }
 .looping-active{
-  color:red;
+  color:#FC9D9D;
 }
 .setStartTime-button{
   display: inline;
-  color:red;
+  color:#FC9D9D;
 }
 .setEndTime-button{
   display: inline;
-  color:blue;
+  color:#AAD6EC;
 }

@@ -11,8 +11,10 @@ const YouTubeABLoop = () => {
   const [startTime, setStartTime] = useState(0);
   const [endTime, setEndTime] = useState(100);
   const [currentTime, setCurrentTime] = useState(0);
+  const [selectedSpeed,setSelectedSpeed] = useState(1.00)
   const [isLooping, setIsLooping] = useState(true);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const playerRef = useRef(null);
   const timerRef = useRef(null);
   const elementRef = useRef(null);
@@ -54,7 +56,6 @@ const YouTubeABLoop = () => {
   }, [startTime, endTime, isLooping, currentTime]);
   useEffect(() => { // DOMが完全にロードされた後に要素の幅を取得
    if (elementRef.current) { setWidth(elementRef.current.offsetWidth); } }, []);
-    
   /*以下関数 */
   const createPlayer = (id) => {
     if (playerRef.current) {
@@ -115,11 +116,12 @@ const YouTubeABLoop = () => {
     if (match) {
       const extractedId = match[1];
       setVideoId(extractedId);
+      setErrorMessage("")
     } else {
-      alert("Please enter a valid YouTube video URL");
+      setErrorMessage("Please enter a valid YouTube video URL");
     }
   };
-
+ 
   const togglePlayPause = () => {
     if (!playerRef.current) return;
 
@@ -177,12 +179,15 @@ const YouTubeABLoop = () => {
   const setCurrentTimeAsEnd = () => {
     setEndTime(currentTime);
   };
-
+  const clearURL = () => {
+    setVideoUrl("");
+  }
   return (
     <div className="aab-loop-container">
       <div className="video-area">
         <div className="url-input-container">
           <div>Please paste YouTube URL or ID</div>
+          <p className="error-message">{errorMessage}</p>
           <input
             type="text"
             placeholder="Please paste YouTube URL or ID"
@@ -190,6 +195,7 @@ const YouTubeABLoop = () => {
             autocomplete="videoUrl"
             onChange={(e) => setVideoUrl(e.target.value)}
           />
+          <button onClick={clearURL} >Clear</button>
         </div>
 
         <div className="player-container">
@@ -235,7 +241,7 @@ const YouTubeABLoop = () => {
           </div>
           <div className="control-icons">
             <button onClick={togglePlayPause} disabled={!videoId} aria-label="play or pause">
-              {isPlaying ? <Pause color="red"/> : <Play />}
+              {isPlaying ? <Pause color="black"/> : <Play color="#FC9D9D"/>}
             </button>
 
             <button

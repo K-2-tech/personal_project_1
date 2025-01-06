@@ -3,13 +3,13 @@
   <rect width="150" height="100" fill="none" />
   
   <!-- 楕円 -->
-  <ellipse cx="150" cy="100" rx="140" ry="90" stroke="red" stroke-width="20" fill="none" />
+  <ellipse cx="150" cy="100" rx="140" ry="90" stroke="#FC9D9D" stroke-width="20" fill="none" />
   
   <!-- A文字 -->
   <text x="50" y="120" font-family="Arial" font-size="60" fill="black" font-weight="bold">A</text>
   
   <!-- 再生ボタン -->
-  <polygon points="138,80 188,100 138,120" fill="red" />
+  <polygon points="138,80 188,100 138,120" fill="#FC9D9D" />
   
   <!-- B文字 -->
   <text x="220" y="120" font-family="Arial" font-size="60" fill="black" font-weight="bold">B</text>
