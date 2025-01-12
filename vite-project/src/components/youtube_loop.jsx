@@ -1,24 +1,37 @@
 import React, { useState, useRef, useEffect, } from "react";
-import { Play, Pause, Repeat} from "lucide-react";
+import { Play, Pause, Repeat } from "lucide-react";
 import "./youtube_loop.css";
 
 const YouTubeABLoop = () => {
+  const getInitialMemo = () => {
+    const storedMemo = localStorage.getItem('memo');
+    if (storedMemo) {
+      try {
+        const parsedMemo = JSON.parse(storedMemo);
+        return Array.isArray(parsedMemo) ? parsedMemo : [];
+      } catch (e) {
+        console.error('Failed to parse stored memo:', e);
+        return [];
+      }
+    }
+    return [];
+  };
   const [videoUrl, setVideoUrl] = useState(
     "https://www.youtube.com/watch?v=lN8xbrzvggA&ab_channel=JazzTutorial%7CwithJulianBradley"
   );
+  const [memo, setMemo] = useState([]);
   const [videoId, setVideoId] = useState("");
   const [videoMetadata, setVideoMetadata] = useState(null);
   const [startTime, setStartTime] = useState(0);
   const [endTime, setEndTime] = useState(100);
   const [currentTime, setCurrentTime] = useState(0);
-  const [selectedSpeed,setSelectedSpeed] = useState(1.00)
   const [isLooping, setIsLooping] = useState(true);
   const [isPlaying, setIsPlaying] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const playerRef = useRef(null);
   const timerRef = useRef(null);
   const elementRef = useRef(null);
-  const [width, setWidth] = useState(0); 
+  const [width, setWidth] = useState(0);
   /*urlが変更されたらID抽出 */
   useEffect(() => {
     extractVideoId();
@@ -55,7 +68,29 @@ const YouTubeABLoop = () => {
     }, 100);
   }, [startTime, endTime, isLooping, currentTime]);
   useEffect(() => { // DOMが完全にロードされた後に要素の幅を取得
-   if (elementRef.current) { setWidth(elementRef.current.offsetWidth); } }, []);
+    if (elementRef.current) { setWidth(elementRef.current.offsetWidth); }
+  }, []);
+  // ページ読み込み時にローカルストレージからメモを取得
+  useEffect(() => {
+    const storedMemo = localStorage.getItem('memo');
+    if (storedMemo) {
+      try {
+        const parsedMemo = JSON.parse(storedMemo);
+        setMemo(Array.isArray(parsedMemo) ? parsedMemo : []);
+      } catch (e) {
+        console.error('Failed to parse stored memo:', e);
+        setMemo([]);
+      }
+    }
+  }, []);
+
+  // メモが変更されたらローカルストレージに保存
+  useEffect(() => {
+    if (memo.length > 0) {  // メモが空でない場合のみ保存
+      localStorage.setItem('memo', JSON.stringify(memo));
+      console.log('Saving to localStorage:', memo);
+    }
+  }, [memo]);
   /*以下関数 */
   const createPlayer = (id) => {
     if (playerRef.current) {
@@ -182,6 +217,19 @@ const YouTubeABLoop = () => {
   const clearURL = () => {
     setVideoUrl("");
   }
+  const handleSaveUrls = (event) => {
+    const [url, title] = event.target.value.split(',');
+    if (url && title) {
+      const newMemo = [...memo, [url, title]];
+      setMemo(newMemo);
+      console.log('Updated memo:', newMemo);
+    }
+  };
+  const copyToClipboard = (url) =>{
+    console.log(url)
+    navigator.clipboard.writeText(url);
+    alert("Copied URL !");
+  }
   return (
     <div className="aab-loop-container">
       <div className="video-area">
@@ -195,8 +243,20 @@ const YouTubeABLoop = () => {
             autocomplete="videoUrl"
             onChange={(e) => setVideoUrl(e.target.value)}
           />
-          <button onClick={clearURL} >Clear</button></div>
-          
+            <button onClick={clearURL} >Clear</button>
+            {videoMetadata && (
+              <button 
+                onClick={handleSaveUrls} 
+                value={`${videoUrl},${videoMetadata.title}`}
+              >
+                Save URL
+              </button>
+            )}
+          </div>
+          {memo.slice(-10).reverse().map((item, index) => (
+            <div key={memo.length - 10 + index} className="memo-item">
+              <button onClick={() => copyToClipboard(item[0])}
+                className="memo-button">{item[1]}</button></div>))}
         </div>
 
         <div className="player-container">

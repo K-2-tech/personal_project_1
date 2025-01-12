@@ -6,14 +6,15 @@ body{box-sizing: border-box;}
 }
 .url-input-box{
   display: flex;
+  gap:5px;
 }
 .url-input-box>input {
   flex-grow: 1;
-  padding: 10px;
+  padding: 5px;
   font-size: 16px;
   border: 1px solid #999;
   background-color: #e0e0e0;
-  margin-right: 10px;
+
   box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.2),
   inset -2px -2px 5px rgba(255, 255, 255, 0.7);
 

@@ -15,6 +15,8 @@ const AppDescription = () => {
         <ul>
           <li>Select any YouTube videos by pasting the URL</li>
           <li>Repeat full or a part of YouTube video in infinite loop</li>
+          <li>[Save URL] button to easily save the URL. Click on the title to copy the URL.</li>
+          <li>To delete the saved URL, please press Ctrl + Shift + R.</li>
         </ul>
       </div>
     </>
